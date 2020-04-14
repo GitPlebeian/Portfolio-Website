@@ -1,0 +1,14 @@
+{
+  "name": "personal-site-2.0",
+  "version": "1.0.0",
+  "description": "Jax Tubbs' Personal Site",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.2"
+  }
+}
