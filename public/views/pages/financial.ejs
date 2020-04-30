@@ -11,6 +11,52 @@
             <canvas id="spy-chart" width="300" height="100"></canvas>
         </div>
     </div>
+    <div class="row">
+        <div class="four columns">
+            <fieldset>
+                <legend>Create Profile</legend>
+                <form action="/financial/createProfile" method="post">
+                    <input type="text" id="profileName" name="profileName" value="" placeholder="Profile Name">
+                    <br>
+                    <button type="submit" class="button-primary" name="button">Submit</button>
+                </form>
+            </fieldset>
+        </div>
+        <div class="four columns">
+            <fieldset>
+                <legend>Create Profile</legend>
+                <form action="/" method="get">
+                    <input type="text" id="profileName" name="profileName" value="" placeholder="Profile Name">
+                    <br>
+                    <button type="submit" class="button-primary" name="button">Submit</button>
+                </form>
+            </fieldset>
+        </div>
+        <div class="four columns">
+            <fieldset>
+                <legend>Create Profile</legend>
+                <form action="/" method="get">
+                    <input type="text" id="profileName" name="profileName" value="" placeholder="Profile Name">
+                    <br>
+                    <button type="submit" class="button-primary" name="button">Submit</button>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+    <hr>
+    <% profiles.forEach((profile, i) => { %>
+        <% if (i % 3 == 0) { %>
+            <div class="row">
+        <% } %>
+        <div class="four columns" style="border-radius: 4px; border: 1px solid #aaa; padding: 8px;">
+            <span><b><%= profile.profileName %></b></span>
+        </div>
+        <% if (i % 3 == 2 || i == profiles.length - 1) { %>
+            </div>
+        <% } %>
+    <% }) %>
+    <div class="row">
+    </div>
 </div>
 <script src="/js/Chart.bundle.min.js"></script>
 <script src="/js/Jquery.js"></script>

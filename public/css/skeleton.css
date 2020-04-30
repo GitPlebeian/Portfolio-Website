@@ -273,9 +273,9 @@ legend {
   display: block;
   margin-bottom: .5rem;
   font-weight: 600; }
-fieldset {
+/* fieldset {
   padding: 0;
-  border-width: 0; }
+  border-width: 3; } */
 input[type="checkbox"],
 input[type="radio"] {
   display: inline; }

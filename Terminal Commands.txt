@@ -1,0 +1,1 @@
+DEBUG=Get-SPY-Data node app.js

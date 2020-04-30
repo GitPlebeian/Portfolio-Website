@@ -33,7 +33,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use('/', webRoutes)
 app.use('/data', dataRoutes)
-scheduler.scheduleTasks()
+// scheduler.scheduleTasks()
 server.listen(80, function() {
 	console.log("Starting Server")
 })
