@@ -126,5 +126,127 @@ module.exports = {
                 res.send("No profile found for profileName: " + profileName)
             }
         })
+    },
+    viewTrade: function(req, res, next) {
+        let profileName = req.query.profileName
+        let tradeID = req.query.tradeID
+        if (!profileName || !tradeID) {
+            res.send("Fields Not Provided")
+            return
+        }
+
+        TrackingProfile.findOne({
+            profileName: profileName
+        }, function(err, profile) {
+            if (err) {
+                res.send(err)
+            } else if (profile) {
+                tradeIndex = -1
+                for (i = 0;i < profile.trades.length;i++) {
+                    if (profile.trades[i]._id == tradeID) {
+                        tradeIndex = i
+                        break
+                    }
+                }
+                if (tradeIndex == -1) {
+                    res.send("Trade Not Found for trade ID: " + tradeID)
+                    return
+                }
+                res.render('viewTrade', {
+                    trade: profile.trades[tradeIndex],
+                    profileName: profile.profileName
+                })
+            } else {
+                res.send("Profile not found for profileName: " + profileName)
+            }
+        })
+    },
+    addBuyOrder: function(req, res, next) {
+        let profileName = req.query.profileName
+        let tradeID = req.query.tradeID
+        let numberOfSharesPurchased = req.body.numberOfSharesPurchased
+        let averageSharePrice = req.body.averageSharePrice
+        let date = req.body.date
+        if (!profileName || !tradeID || !date || !Number(numberOfSharesPurchased) || !Number(averageSharePrice)) {
+            res.send("Fields Not Provided")
+            return
+        }
+        TrackingProfile.findOne({
+            profileName: profileName
+        }, function(err, profile) {
+            if (err) {
+                res.send(err)
+            } else if (profile) {
+                tradeIndex = -1
+                for (i = 0;i < profile.trades.length;i++) {
+                    if (profile.trades[i]._id == tradeID) {
+                        tradeIndex = i
+                        break
+                    }
+                }
+                if (tradeIndex == -1) {
+                    res.send("Trade Not Found for trade ID: " + tradeID)
+                    return
+                }
+                profile.trades[tradeIndex].buyOrders.push({
+                    shares: numberOfSharesPurchased,
+                    price: averageSharePrice,
+                    date: date
+                })
+                profile.save(function(err) {
+                    if (err) {
+                        res.send(err)
+                        return
+                    }
+                    res.redirect('/financial/viewTrade?profileName=' + profile.profileName + "&tradeID=" + profile.trades[tradeIndex]._id)
+                })
+            } else {
+                res.send("Profile not found for profileName: " + profileName)
+            }
+        })
+    },
+    addSellOrder: function(req, res, next) {
+        let profileName = req.query.profileName
+        let tradeID = req.query.tradeID
+        let numberOfSharesSold = req.body.numberOfSharesPurchased
+        let averageSharePrice = req.body.averageSharePrice
+        let date = req.body.date
+        if (!profileName || !tradeID || !date || !Number(numberOfSharesPurchased) || !Number(averageSharePrice)) {
+            res.send("Fields Not Provided")
+            return
+        }
+        TrackingProfile.findOne({
+            profileName: profileName
+        }, function(err, profile) {
+            if (err) {
+                res.send(err)
+            } else if (profile) {
+                tradeIndex = -1
+                for (i = 0;i < profile.trades.length;i++) {
+                    if (profile.trades[i]._id == tradeID) {
+                        tradeIndex = i
+                        break
+                    }
+                }
+                if (tradeIndex == -1) {
+                    res.send("Trade Not Found for trade ID: " + tradeID)
+                    return
+                }
+                profile.trades[tradeIndex].buyOrders.push({
+                    shares: numberOfSharesPurchased,
+                    price: averageSharePrice,
+                    date: date
+                })
+                profile.save(function(err) {
+                    if (err) {
+                        res.send(err)
+                        return
+                    }
+                    res.redirect('/financial/viewTrade?profileName=' + profile.profileName + "&tradeID=" + profile.trades[tradeIndex]._id)
+                })
+            } else {
+                res.send("Profile not found for profileName: " + profileName)
+            }
+        })
     }
 }

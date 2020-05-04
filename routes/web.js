@@ -10,5 +10,7 @@ router.post('/financial/renameProfile', trackingController.renameProfile)
 router.post('/financial/deleteProfile', trackingController.deleteProfile)
 router.get('/financial/viewProfile', trackingController.viewProfile)
 router.post('/financial/createTrade', trackingController.createTrade)
+router.get('/financial/viewTrade', trackingController.viewTrade)
+router.post('/financial/viewTrade/addBuyOrder', trackingController.addBuyOrder)
 
 module.exports = router

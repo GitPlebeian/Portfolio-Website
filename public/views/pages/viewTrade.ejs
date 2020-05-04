@@ -1,0 +1,79 @@
+<%- include ("../partials/head") %>
+<div class="container">
+    <div class="row">
+        <div class="u-full-width" style="margin-top: 12.5%">
+            <h2><b>View Trade: <%= trade.symbol %></b></h2>
+            <%- include ("../partials/navigationButtons") %>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="u-full-width">
+            <fieldset>
+                <legend><h4><b>Overview</b></h4></legend>
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <div class="six columns">
+            <fieldset>
+                <legend><h4><b>Add Buy Order</b></h4></legend>
+                <form class="" action="/financial/viewTrade/addBuyOrder?profileName=<%= profileName %>&tradeID=<%= trade._id %>" method="post" style="margin: 0;">
+                    <input type="text" name="numberOfSharesPurchased" value="" placeholder="Number Of Shares" style="width: 100%;">
+                    <br>
+                    <input type="text" name="averageSharePrice" value="" placeholder="Average Price" style="width: 100%;">
+                    <br>
+                    <input type="text" name="date" value="" placeholder="Date" style="width: 100%;">
+                    <br>
+                    <input type="submit" class="button-primary" name="" value="submit" style="margin: 0; width: 100%;">
+                </form>
+            </fieldset>
+        </div>
+        <div class="six columns">
+            <fieldset>
+                <legend><h4><b>Add Sell Order</b></h4></legend>
+                <form class="" action="index.html" method="post" style="margin: 0;">
+                    <input type="text" name="shares" value="" placeholder="Number Of Shares" style="width: 100%;">
+                    <br>
+                    <input type="text" name="averagePrice" value="" placeholder="Average Price" style="width: 100%;">
+                    <br>
+                    <input type="text" name="date" value="" placeholder="Date" style="width: 100%;">
+                    <br>
+                    <input type="submit" class="button-primary" name="" value="submit" style="margin: 0; width: 100%;">
+                </form>
+            </fieldset>
+        </div>
+    </div>
+    <h4><b>Buy Orders</b></h4>
+    <% trade.buyOrders.forEach((buyOrder, i) => { %>
+        <% if (i % 3 == 0) { %>
+            <div class="row" style="margin-top: 16px;">
+        <% } %>
+        <div class="four columns" style="border-radius: 4px; border: 1px solid #aaa; padding: 8px;">
+            <span><b>Number Of Shares: </b><%= buyOrder.shares %></span>
+            <br>
+            <span><b>Average Price: </b><%= buyOrder.price %></span>
+            <br>
+            <span><b>Date: </b><%= buyOrder.date %></span>
+        </div>
+        <% if (i % 3 == 2 || i == trade.buyOrders.length - 1) { %>
+            </div>
+        <% } %>
+    <% }) %>
+    <h4><b>Sell Orders</b></h4>
+    <% trade.sellOrders.forEach((sellOrder, i) => { %>
+        <% if (i % 3 == 0) { %>
+            <div class="row" style="margin-top: 16px;">
+        <% } %>
+        <div class="four columns" style="border-radius: 4px; border: 1px solid #aaa; padding: 8px;">
+            hi
+        </div>
+        <% if (i % 3 == 2 || i == trade.sellOrders.length - 1) { %>
+            </div>
+        <% } %>
+    <% }) %>
+</div>
+<script src="/js/Chart.bundle.min.js"></script>
+<script src="/js/Jquery.js"></script>
+<script src="/js/viewTrade.js"></script>
+<%- include ("../partials/footer") %>

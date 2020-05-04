@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 const TradeOrder = new Schema({
     shares: Number,
     price: Number,
-    date: String
+    date: String,
+    newEquity: Number
 })
 
 const Trade = new Schema({

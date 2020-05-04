@@ -41,6 +41,8 @@
                 <% } else if (trade.buyOrders.length > 0 && trade.open == false && trade.sellOrders.length > 0) { %>
                 <span><b><%= trade.symbol %></b> : <%= trade.buyOrders[0].date - trade.sellOrders[trade.sellOrders.length - 1].date %></span>
                 <% } %>
+                <br>
+                <a type="button" class="button" name="button" style="width: 100%; margin: 0;" href="/financial/viewTrade/?profileName=<%= profile.profileName %>&tradeID=<%= trade._id %>">View / Edit Trade</a>
             </div>
             <% if (i % 3 == 2 || i == profile.trades.length - 1) { %>
                 </div>
