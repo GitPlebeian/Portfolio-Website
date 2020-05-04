@@ -15,30 +15,31 @@
         <div class="four columns">
             <fieldset>
                 <legend>Create Profile</legend>
-                <form action="/financial/createProfile" method="post">
-                    <input type="text" id="profileName" name="profileName" value="" placeholder="Profile Name">
+                <form action="/financial/createProfile" method="post" style="margin: 0;">
+                    <input type="text" name="profileName" value="" placeholder="Profile Name" style="width: 100%">
                     <br>
-                    <button type="submit" class="button-primary" name="button">Submit</button>
+                    <button type="submit" class="button-primary" name="button" style="width: 100%; margin: 0;">Submit</button>
                 </form>
             </fieldset>
         </div>
         <div class="four columns">
             <fieldset>
-                <legend>Create Profile</legend>
-                <form action="/" method="get">
-                    <input type="text" id="profileName" name="profileName" value="" placeholder="Profile Name">
+                <legend>Rename Profile</legend>
+                <form action="/financial/renameProfile" method="post" style="margin: 0;">
+                    <input type="text" name="originalProfileName" value="" placeholder="Original Profile Name" style="width: 100%;">
                     <br>
-                    <button type="submit" class="button-primary" name="button">Submit</button>
+                    <input type="text" name="newProfileName" value="" placeholder="New Profile Name" style="width: 100%;">
+                    <button type="submit" class="button-primary" name="button" style="width: 100%; margin: 0;">Submit</button>
                 </form>
             </fieldset>
         </div>
         <div class="four columns">
             <fieldset>
-                <legend>Create Profile</legend>
-                <form action="/" method="get">
-                    <input type="text" id="profileName" name="profileName" value="" placeholder="Profile Name">
+                <legend>Delete Profile</legend>
+                <form action="/financial/deleteProfile" method="post" style="margin: 0;">
+                    <input type="text" name="profileName" value="" placeholder="Profile Name" style="width: 100%;">
                     <br>
-                    <button type="submit" class="button-primary" name="button">Submit</button>
+                    <button type="submit" class="button-primary" name="button" style="width: 100%; margin: 0;">Submit</button>
                 </form>
             </fieldset>
         </div>
@@ -46,10 +47,20 @@
     <hr>
     <% profiles.forEach((profile, i) => { %>
         <% if (i % 3 == 0) { %>
-            <div class="row">
+            <div class="row" style="margin-top: 16px;">
         <% } %>
         <div class="four columns" style="border-radius: 4px; border: 1px solid #aaa; padding: 8px;">
             <span><b><%= profile.profileName %></b></span>
+            <br>
+            <span>Total Trades: <%= profile.trades.length %></span>
+            <br>
+            <span>Open Trades: <%= openTrades[i] %></span>
+            <br>
+            <span>Closed Trades: <%= closedTrades[i] %></span>
+            <br>
+            <span>Date Created: <%= datesCreated[i] %></span>
+            <br>
+            <a href="/financial/viewProfile?profileName=<%= profile.profileName %>" class="button" style="width: 100%; margin: 0;">View</a>
         </div>
         <% if (i % 3 == 2 || i == profiles.length - 1) { %>
             </div>

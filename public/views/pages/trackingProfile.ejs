@@ -1,0 +1,54 @@
+<%- include ("../partials/head") %>
+<div class="container">
+    <div class="row">
+        <div class="u-full-width" style="margin-top: 12.5%">
+            <h2><b>Profile: <%= profile.profileName %></b></h2>
+            <%- include ("../partials/navigationButtons") %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="u-full-width">
+            <hr>
+            <fieldset>
+                <legend><h4><b>New Trade</b></h4></legend>
+                <form class="" action="/financial/createTrade" method="post" style="margin: 0;">
+                    <input type="text" name="profileName" value="<%= profile.profileName %>" placeholder="Profile Name">
+                    <br>
+                    <input type="text" name="symbol" value="" placeholder="Symbol">
+                    <br>
+                    <input type="text" name="numberOfSharesPurchased" value=""placeholder="# Shares Purchased">
+                    <br>
+                    <input type="text" name="averageSharePrice" value="" placeholder="Average Share Price">
+                    <br>
+                    <input type="text" name="optimism" value="" placeholder="Optimism 1-7">
+                    <br>
+                    <input type="text" name="date" value="" placeholder="Date (12-05-2020)"> <button href="button">Today's Date</button>
+                    <br>
+                    <input class="button button-primary" type="submit" name="" value="Submit" style="margin: 0;">
+                </form>
+            </fieldset>
+        </div>
+    </div>
+        <fieldset>
+        <legend><h4><b>Trades</b></h4></legend>
+        <% profile.trades.forEach((trade, i) => { %>
+            <% if (i % 3 == 0) { %>
+                <div class="row" style="margin-top: 16px;">
+            <% } %>
+            <div class="four columns" style="border-radius: 4px; border: 1px solid #aaa; padding: 8px;">
+                <% if (trade.buyOrders.length > 0 && trade.open == true) { %>
+                <span><b><%= trade.symbol %></b> : <%= trade.buyOrders[0].date %></span>
+                <% } else if (trade.buyOrders.length > 0 && trade.open == false && trade.sellOrders.length > 0) { %>
+                <span><b><%= trade.symbol %></b> : <%= trade.buyOrders[0].date - trade.sellOrders[trade.sellOrders.length - 1].date %></span>
+                <% } %>
+            </div>
+            <% if (i % 3 == 2 || i == profile.trades.length - 1) { %>
+                </div>
+            <% } %>
+        <% }) %>
+    </fieldset>
+</div>
+<script src="/js/Chart.bundle.min.js"></script>
+<script src="/js/Jquery.js"></script>
+<script src="/js/trackingProfile.js"></script>
+<%- include ("../partials/footer") %>
